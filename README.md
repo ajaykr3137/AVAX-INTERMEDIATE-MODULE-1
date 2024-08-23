@@ -48,8 +48,8 @@ To run this program, you can use Remix, an online Solidity IDE. Follow these ste
 
 ## Author
 
-{ajaykr3137]  
-Metacrafters ID: ajaykr
+ajaykr3137  
+ajaykr
 
 ## License
 
