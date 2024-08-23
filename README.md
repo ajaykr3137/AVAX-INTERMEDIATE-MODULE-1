@@ -51,8 +51,5 @@ To run this program, you can use Remix, an online Solidity IDE. Follow these ste
 ajaykr3137  
 ajaykr
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
