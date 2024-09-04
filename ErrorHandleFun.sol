@@ -1,35 +1,29 @@
 // SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
 
-pragma solidity ^0.8.9;
+contract FunctionsAndErrors {
+    uint public leapYearCount;
 
-contract ErrorHandling {
-    uint public balance = 0;
 
-    function depositRequire(uint _amount) public {
-        require(_amount > 0, "Deposit amount must be greater than zero");
-        balance += _amount;
+    function isLeapYear(uint year) internal pure returns (bool) {
+        // A leap year must be divisible by 4 and either not divisible by 100 or divisible by 400
+        return (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0);
     }
 
-    function withdrawRequire(uint _amount) public {
-        require(_amount > 0, "Withdrawal amount must be greater than zero");
-        require(_amount <= balance, "Insufficient balance");
-        balance -= _amount;
+    function requireLeapYear(uint year) external {
+        require(isLeapYear(year), "The year you inputted is NOT a LEAP year");
+        ++leapYearCount;
     }
 
-    function divideRequire(uint _numerator, uint _denominator) public pure returns (uint) {
-        require(_denominator != 0, "Cannot divide by zero");
-        return _numerator / _denominator;
+    function assertLeapYear(uint year) external {
+        assert(isLeapYear(year)); // If the year is not a leap year, this will trigger a Solidity assertion
+        ++leapYearCount;
     }
 
-    function assertFunction(uint _numerator, uint _denominator, uint _expectedResult) public pure {
-        uint result = divideRequire(_numerator, _denominator);
-        assert(result == _expectedResult);
-    }
-
-    function revertFunction(uint _numerator, uint _denominator, uint _revertValue) public pure {
-        uint result = divideRequire(_numerator, _denominator);
-        if (result == _revertValue) {
-            revert("The function reverts because the result matches the revert value.");
+    function revertLeapYear(uint year) external {
+        if (!isLeapYear(year)) {
+            revert("The year you inputted is NOT a LEAP year");
         }
+        ++leapYearCount;
     }
 }
